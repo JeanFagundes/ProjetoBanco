@@ -198,20 +198,19 @@ function sacarDinheiro() {
 
                     retirarValor(nomedaConta, answers.sacar)
 
-                    // console.log(Saldo(nomedaConta))
 
                 })
         })).catch((err => console.log(err)))
 }
 
 function retirarValor(nome, valor) {
-    
+
     const usuario = localizarConta(nome)
 
     const saldo = parseFloat(usuario.balance)
 
     usuario.balance = parseFloat(usuario.balance) - parseFloat(valor)
-    if (usuario.balance >= 0 && valor>10) {
+    if (usuario.balance >= 0 && valor > 10) {
         fs.writeFileSync(`contas/${nome}.json`,
             JSON.stringify(usuario),
             function (err) { console.log(err) })
@@ -220,9 +219,8 @@ function retirarValor(nome, valor) {
         console.log(chalk.bgBlue(`Saldo total: R$${usuario.balance}\n`))
         return menu()
     } else {
-        //  var saldo = Saldo(nome)
 
-        if (saldo <= 10 || valor <=10) {
+        if (saldo <= 10 || valor <= 10) {
             console.log(chalk.bgRed('O valor minimo para saque é de R$10.00 \n'))
             return menu()
         }
